@@ -6,7 +6,7 @@ let lastRenderTime = 0
 let gameOver = false
 const gameBoard = document.getElementById('game-board')
 
-function main(currentTime) {
+const main = (currentTime) => {
   if (gameOver) {
     if (confirm('You lost. Press ok to restart.')) {
       window.location = '/'
@@ -14,11 +14,9 @@ function main(currentTime) {
     return
   }
 
-
   window.requestAnimationFrame(main)
   const secondsSinceLastRender = (currentTime - lastRenderTime) / 1000
   if (secondsSinceLastRender < 1 / SNAKE_SPEED) return
-
 
   lastRenderTime = currentTime
 
@@ -28,18 +26,18 @@ function main(currentTime) {
 
 window.requestAnimationFrame(main)
 
-function update() {
+const update = () => {
   updateSnake()
   updateFood()
   checkDeath()
 }
 
-function draw() {
+const draw = () => {
   gameBoard.innerHTML = ''
   drawSnake(gameBoard)
   drawFood(gameBoard)
 }
 
-function checkDeath() {
+const checkDeath = () => {
   gameOver = outsideGrid(getSnakeHead()) || snakeIntersection()
 }
